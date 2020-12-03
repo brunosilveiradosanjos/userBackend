@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { response, Router } from 'express';
 
 const postsRouter = Router();
 
@@ -15,7 +15,7 @@ postsRouter.get('/', (request, response) => {
 postsRouter.post('/', (request, response) => {
 
     const { title } = request.body;
-    const id = posts.length + 1;
+    const id = posts.length;
 
     const post = {
         id,
@@ -40,8 +40,19 @@ postsRouter.delete('/', (request, response) => {
 
     posts.splice(index, 1)
 
-    return response.json(posts).status(200);
+    return response.status(200).json(posts);
 });
+
+postsRouter.put('/', (request, response) => {
+    const { id } = request.body;
+
+    let index = posts.findIndex(x => x.id == id);
+
+    posts[index].title = posts[index].title.toUpperCase();
+    // console.log(posts[index].title.toUpperCase());
+
+    return response.status(200).json(posts);
+})
 
 
 
