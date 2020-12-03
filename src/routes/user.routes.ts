@@ -12,7 +12,6 @@ usersRouter.get('/', (request, response) => {
     return response.json(users);
 })
 
-
 usersRouter.post('/', (request, response) => {
     const { id, name, age, email } = request.body;
 
